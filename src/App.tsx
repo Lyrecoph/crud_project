@@ -25,6 +25,7 @@ function App() {
               key={client.id} 
               detailClient={client} 
               onDelete={()=>handleDelete(client.id)} 
+              backgroundAddColor='green'
             />
           )
         }
