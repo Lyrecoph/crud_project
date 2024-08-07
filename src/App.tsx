@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import Client from './components/Client'
-import ClientForm from './components/ClientForm'
-import { ClientType } from './typescript/ClientType'
 
 function App() {
   const title = "Liste des clients"
@@ -17,9 +15,7 @@ function App() {
     setClients(clients.filter(client => client.id !== id))
   }
 
-  const handleAddCustomer = (client:ClientType) => {
-    setClients([...clients, client])
-  }
+  
   
   return (
     <>
@@ -36,7 +32,6 @@ function App() {
           )
         }
       </ul>
-      <ClientForm onAddCustomer={handleAddCustomer} />
     </>
   )
 }
