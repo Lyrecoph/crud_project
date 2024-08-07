@@ -1,16 +1,17 @@
+import { ClientType } from "../typescript/ClientType";
+
+type ColorOption = "green" | "gold" | "purple";
 
 type ClientProps = {
-    detailClient:{
-        id: number;
-        nom: string;
-    };
-    onDelete: () => void
+    detailClient:ClientType;
+    onDelete: () => void;
+    backgroundAddColor?: ColorOption
 }
-export default function Client({detailClient, onDelete}:ClientProps){
+export default function Client({detailClient, onDelete, backgroundAddColor}:ClientProps){
     return(
         <li>
               {detailClient.nom} 
-              <button onClick={onDelete}>X</button>
+              <button style={{background:backgroundAddColor}} onClick={onDelete}>X</button>
         </li>
     )
 }

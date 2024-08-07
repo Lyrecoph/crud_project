@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import Client from './components/Client'
+import ClientForm from './components/ClientForm'
+import { ClientType } from './typescript/ClientType'
 
 function App() {
   const title = "Liste des clients"
@@ -13,6 +15,10 @@ function App() {
 
   const handleDelete = (id:number) => {
     setClients(clients.filter(client => client.id !== id))
+  }
+
+  const handleAddCustomer = (client:ClientType) => {
+    setClients([...clients, client])
   }
   
   return (
@@ -29,13 +35,7 @@ function App() {
           )
         }
       </ul>
-      <form action="">
-        <input 
-          type="text" 
-          placeholder='Entrer un nom' 
-        />
-        <button>Confirmer</button>
-      </form>
+      <ClientForm onAddCustomer={handleAddCustomer} />
     </>
   )
 }
