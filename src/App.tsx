@@ -1,23 +1,42 @@
+import { useState } from 'react'
 import './App.css'
+import Client from './components/Client'
+import ClientForm from './components/ClientForm'
+import { ClientType } from './typescript/ClientType'
 
 function App() {
+  const title = "Liste des clients"
+  const [clients, setClients] = useState([
+    {id:1, nom:"Paul DUPONT"},
+    {id:2, nom:"Lisa DURAND"},
+    {id:3, nom:"Geraud FORD"},
+    {id:4, nom:"Scott McCall"},
+  ])
+
+  const handleDelete = (id:number) => {
+    setClients(clients.filter(client => client.id !== id))
+  }
+
+  const handleAddCustomer = (client:ClientType) => {
+    setClients([...clients, client])
+  }
   
   return (
     <>
-      <h1>Liste des clients</h1>
+      <h1>{title}</h1>
       <ul>
-        <li>Paul DUPONT <button>X</button></li>
-        <li>Lisa DURAND <button>X</button></li>
-        <li>Geraud FORD <button>X</button></li>
-        <li>Scott McCall <button>X</button></li>
+        {
+          clients.map(client =>
+            <Client 
+              key={client.id} 
+              detailClient={client} 
+              onDelete={()=>handleDelete(client.id)} 
+              backgroundAddColor='green'
+            />
+          )
+        }
       </ul>
-      <form action="">
-        <input 
-          type="text" 
-          placeholder='Entrer un nom' 
-        />
-        <button>Confirmer</button>
-      </form>
+      <ClientForm onAddCustomer={handleAddCustomer} />
     </>
   )
 }
